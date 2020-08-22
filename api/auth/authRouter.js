@@ -26,16 +26,12 @@ router.post('/register', requireInBody(['username', 'password']), (req, res) => 
   const { username, password } = req.body;
   const hash = bcrypt.hashSync(password, bcryptRounds);
   usersDb.add({ username, password: hash })
-    .then(response => {
-      if (response && response.id) {
-        const token = signToken({ id: response.id, username });
+    .then(id => {
+      if (id) {
+        const token = signToken({ id, username });
         res.status(201).json({ message: 'created new user.', username, token });
-      } else if (response && response.err) {
-        if (response.err === 'SQLITE_CONSTRAINT') {
-          res.status(400).json({ message: 'An account with that username already exists', error: response.err });
-        } else {
-          res.status(500).json({ message: 'There was an issue creating a user.', error: response.err });
-        }
+      } else {
+        res.status(400).json({ message: 'An account with that username already exists.' });
       }
     })
     .catch(err => res.status(500).json({ message: 'There was an issue creating a user.', error: err.message }));
