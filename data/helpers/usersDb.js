@@ -9,7 +9,7 @@ module.exports = {
 function add(user) {
   const response = {};
   return db('users')
-    .insert(user)
+    .insert(user, 'id')
     .then(async id => {
       response.user = await findBy({ id });
       return response;
