@@ -19,9 +19,9 @@ function signToken(user) {
 }
 
 function restricted(req, res, next) {
-  const token = req.headers.Authorization;
+  const token = req.headers.authorization;
   if (token) {
-    jwt.verify(token, constants.jwtSecret, (error, decodedToken) => {
+    jwt.verify(token, secrets.jwtSecret, (error, decodedToken) => {
       if (error) {
         res.status(401).json({ message: 'Please provide credentials.' });
       } else {

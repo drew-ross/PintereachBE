@@ -41,4 +41,9 @@ router.post('/register', requireInBody(['username', 'password']), (req, res) => 
     .catch(err => res.status(500).json({ message: 'There was an issue creating a user.', error: err.message }));
 });
 
+//test restricted middleware/jwt
+// router.get('/', restricted, (req, res) => {
+//   res.status(200).json(req.decodedToken)
+// })
+
 module.exports = router;
