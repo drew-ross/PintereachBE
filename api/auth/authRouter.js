@@ -7,4 +7,8 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: 'auth' });
 });
 
+// router.post('/register', (req, res) => {
+
+// })
+
 module.exports = router;
