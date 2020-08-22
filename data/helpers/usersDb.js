@@ -10,13 +10,10 @@ function add(user) {
   const response = {};
   return db('users')
     .insert(user, 'id')
-    .then(id => {
-      response.id = id;
-    })
+    .then(id => id)
     .catch(err => {
-      console.log(err.code);
-      response.err = err.code;
-      return response;
+      console.log(err);
+      return null;
     });
 }
 
