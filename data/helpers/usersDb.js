@@ -10,9 +10,8 @@ function add(user) {
   const response = {};
   return db('users')
     .insert(user, 'id')
-    .then(async id => {
-      response.user = await findBy({ id });
-      return response;
+    .then(id => {
+      response.id = id;
     })
     .catch(err => {
       console.log(err.code);
