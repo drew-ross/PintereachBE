@@ -10,8 +10,8 @@ function add(user) {
   const response = {};
   return db('users')
     .insert(user)
-    .then(id => {
-      response.body = id;
+    .then(async id => {
+      response.user = await findBy({ id });
       return response;
     })
     .catch(err => {
@@ -22,9 +22,15 @@ function add(user) {
 }
 
 function findBy(column) {
-
+  return db('users')
+    .where(column)
+    .first()
+    .then(user => user)
+    .catch(err => {
+      console.log(err.code);
+    });
 }
 
 function findAll() {
 
-}
+};
