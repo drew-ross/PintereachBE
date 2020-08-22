@@ -2,6 +2,7 @@ const express = require('express');
 const knex = require('knex');
 const bcrypt = require('bcryptjs');
 const usersDb = require('../../data/helpers/usersDb');
+const { bcryptRounds } = require('../../config/secrets');
 const { signToken, restricted } = require('../../utils/jsonwebtoken');
 const { requireInBody } = require('../../utils/middleware');
 
@@ -13,7 +14,8 @@ router.get('/', (req, res) => {
 
 router.post('/register', requireInBody(['username', 'password']), (req, res) => {
   const { username, password } = req.body;
-  usersDb.add({ username, password })
+  const hash = bcrypt.hashSync(password, bcryptRounds);
+  usersDb.add({ username, password: hash })
     .then(response => {
       if (response && response.body) {
         res.status(201).json(response.body);
