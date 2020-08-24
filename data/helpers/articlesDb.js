@@ -30,15 +30,16 @@ function addByUser(user_id, article) {
     user_id
   };
   return db('articles')
-    .insert(newArticle)
+    .insert(newArticle, 'id')
     .then(id => findById(id))
     .catch(err => console.log(err));
 }
 
 function updateByUser(user_id, id, article) {
+  const updatedArticle = { ...article, id };
   return db('articles')
     .where({ user_id, id })
-    .update(article)
+    .update(updatedArticle)
     .then(() => findById(id))
     .catch(err => console.log(err));
 }
