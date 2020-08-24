@@ -24,7 +24,7 @@ router.post('/', restricted, requireInBody(['title']), (req, res) => {
     .catch(err => res.status(500).json({ message: 'There was a problem creating the article.', error: err.message }));
 });
 
-router.put('/:id', restricted, requireInBody([]), (req, res) => {
+router.put('/:id', restricted, (req, res) => {
   const user_id = req.decodedToken.subject;
   const article = req.body;
   const id = req.params.id;
@@ -33,7 +33,7 @@ router.put('/:id', restricted, requireInBody([]), (req, res) => {
       if (article) {
         res.status(200).json(article);
       } else {
-        res.status(404).json({ message: 'Article not found.' });
+        res.status(400).json({ message: 'There was an issue updating the article. Either the article does not exist or the request body was improperly formed.' });
       }
     })
     .catch(err => res.status(500).json({ message: 'There was a problem updating the article.', error: err.message }));
