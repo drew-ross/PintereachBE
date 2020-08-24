@@ -8,7 +8,7 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
-server.use('/auth', authRouter);
+server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => res.status(200).json({ message: "server up." }));
 server.get('/api', (req, res) => res.status(200).json({ message: "api up." }));
