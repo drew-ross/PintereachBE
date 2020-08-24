@@ -30,7 +30,7 @@ function addByUser(user_id, article) {
     user_id
   };
   return db('articles')
-    .insert(newArticle)
+    .insert(newArticle, 'id')
     .then(id => findById(id))
     .catch(err => console.log(err));
 }
