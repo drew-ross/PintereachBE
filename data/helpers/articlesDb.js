@@ -17,40 +17,40 @@ function findByUser(user_id) {
 
 function findById(id) {
   return db('articles')
-    .where('id', id)
+    .where('id', Number(id))
     .select(['id', 'title', 'category', 'article_url', 'image_url', 'summary'])
     .first()
     .then(article => article)
     .catch(err => console.log(err));
 }
 
-async function addByUser(user_id, article) {
-  const newArticle = {
-    ...article,
-    user_id
-  };
-  let id = 0;
-  await db('articles')
-    .insert(newArticle, 'id')
-    .then(newId => id = newId)
-    .catch(err => {
-      console.log(err);
-      return false;
-    });
-  const returningArticle = await findById(Number(id));
-  return returningArticle;
-}
-
-// function addByUser(user_id, article) {
+// async function addByUser(user_id, article) {
 //   const newArticle = {
 //     ...article,
 //     user_id
 //   };
-//   return db('articles')
+//   let id = 0;
+//   await db('articles')
 //     .insert(newArticle, 'id')
-//     .then(id => findById(id))
-//     .catch(err => console.log(err));
+//     .then(newId => id = newId)
+//     .catch(err => {
+//       console.log(err);
+//       return false;
+//     });
+//   const returningArticle = await findById(Number(id));
+//   return returningArticle;
 // }
+
+function addByUser(user_id, article) {
+  const newArticle = {
+    ...article,
+    user_id
+  };
+  return db('articles')
+    .insert(newArticle, 'id')
+    .then(id => findById(id))
+    .catch(err => console.log(err));
+}
 
 function updateByUser(user_id, id, article) {
   const updatedArticle = { ...article, id };
