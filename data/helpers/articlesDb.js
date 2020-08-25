@@ -17,7 +17,7 @@ function findByUser(user_id) {
 
 function findById(id) {
   return db('articles')
-    .where({ id })
+    .where('id', id)
     .select(['id', 'title', 'category', 'article_url', 'image_url', 'summary'])
     .first()
     .then(article => article)
