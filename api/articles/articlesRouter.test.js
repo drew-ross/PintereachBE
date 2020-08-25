@@ -121,7 +121,6 @@ describe('articles endpoints', () => {
   it('return 401 without auth to DELETE', async () => {
     await supertest(server)
       .delete('/api/articles/1')
-      .set('Authorization', token)
       .then(res => {
         expect(res.status).toBe(401);
       })
