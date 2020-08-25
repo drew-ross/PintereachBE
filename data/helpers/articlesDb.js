@@ -29,7 +29,7 @@ async function addByUser(user_id, article) {
     ...article,
     user_id
   };
-  let id;
+  let id = 0;
   await db('articles')
     .insert(newArticle, 'id')
     .then(newId => id = newId)
@@ -37,7 +37,7 @@ async function addByUser(user_id, article) {
       console.log(err);
       return false;
     });
-  const returningArticle = await findById(id);
+  const returningArticle = await findById(Number(id));
   return returningArticle;
 }
 
