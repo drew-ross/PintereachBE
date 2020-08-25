@@ -19,7 +19,11 @@ router.post('/', restricted, requireInBody(['title']), (req, res) => {
   const article = req.body;
   articlesDb.addByUser(user_id, article)
     .then(article => {
-      res.status(201).json(article);
+      if (article) {
+        res.status(201).json(article);
+      } else {
+        res.status(500).json({ message: 'There was a problem creating the article.', error: err.message });
+      }
     })
     .catch(err => res.status(500).json({ message: 'There was a problem creating the article.', error: err.message }));
 });

@@ -24,16 +24,32 @@ function findById(id) {
     .catch(err => console.log(err));
 }
 
-function addByUser(user_id, article) {
+async function addByUser(user_id, article) {
   const newArticle = {
     ...article,
     user_id
   };
-  return db('articles')
+  let id;
+  await db('articles')
     .insert(newArticle, 'id')
-    .then(id => findById(id))
-    .catch(err => console.log(err));
+    .then(newId => id = newId)
+    .catch(err => {
+      console.log(err);
+      return false;
+    });
+  return findById(id);
 }
+
+// function addByUser(user_id, article) {
+//   const newArticle = {
+//     ...article,
+//     user_id
+//   };
+//   return db('articles')
+//     .insert(newArticle, 'id')
+//     .then(id => findById(id))
+//     .catch(err => console.log(err));
+// }
 
 function updateByUser(user_id, id, article) {
   const updatedArticle = { ...article, id };
