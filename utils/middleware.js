@@ -1,6 +1,6 @@
 module.exports = {
   requireInBody
-}
+};
 
 function requireInBody(keys) {
   return (req, res, next) => {
