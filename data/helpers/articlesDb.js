@@ -37,7 +37,8 @@ async function addByUser(user_id, article) {
       console.log(err);
       return false;
     });
-  return findById(id);
+  const returningArticle = await findById(id);
+  return returningArticle;
 }
 
 // function addByUser(user_id, article) {
