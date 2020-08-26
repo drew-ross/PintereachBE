@@ -24,23 +24,6 @@ function findById(id) {
     .catch(err => console.log(err));
 }
 
-// async function addByUser(user_id, article) {
-//   const newArticle = {
-//     ...article,
-//     user_id
-//   };
-//   let id = 0;
-//   await db('articles')
-//     .insert(newArticle, 'id')
-//     .then(newId => id = newId)
-//     .catch(err => {
-//       console.log(err);
-//       return false;
-//     });
-//   const returningArticle = await findById(Number(id));
-//   return returningArticle;
-// }
-
 function addByUser(user_id, article) {
   const newArticle = {
     ...article,
