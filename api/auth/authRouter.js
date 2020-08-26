@@ -28,7 +28,8 @@ router.post('/register', requireInBody(['username', 'password']), (req, res) => 
   usersDb.add({ username, password: hash })
     .then(id => {
       if (id) {
-        const token = signToken({ id, username });
+        const user = { id, username };
+        const token = signToken(user);
         res.status(201).json({ message: 'created new user.', username, token });
       } else {
         res.status(400).json({ message: 'An account with that username already exists.' });
