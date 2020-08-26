@@ -4,9 +4,15 @@
 This API was created by Drew Ross for a Lambda School Build Week project.
 https://github.com/pintereach-1-bw
 
+
 ## Project Contributors
-
-
+|||
+|---|---|
+|Zoe Stokes| *Project Lead*|
+|Drew Ross |*Backend Engineer*|
+|Greg Wilson |*Frontend Engineer*|
+|Sierra Jasmine |*Marketing & UI*|
+---
 ## Endpoints/Usage
 https://pintereach10.herokuapp.com/
 |Request|Endpoint|Required JSON|Response|Restricted
