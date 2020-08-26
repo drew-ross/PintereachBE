@@ -10,7 +10,13 @@ const router = express.Router();
 router.get('/', restricted, (req, res) => {
   const user_id = req.decodedToken.subject;
   articlesDb.findByUser(user_id)
-    .then(articles => res.status(200).json(articles))
+    .then(articles => {
+      const userArticles = {
+        username: req.decodedToken.username,
+        articles
+      }
+      res.status(200).json(userArticles)
+    })
     .catch(err => res.status(500).json({ message: 'There was a problem getting articles.', error: err.message }));
 });
 
